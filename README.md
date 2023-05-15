@@ -5,7 +5,7 @@ To validate the Salesforce Orgs State Values to the respective list of ISO code 
 
 Procedure:
  
-** Step 1:**
+**Step 1:**
  Get AddressSetting records through metadata API.
  **USE:**
  File.xml
@@ -28,7 +28,7 @@ Procedure:
  
  **Step 3:**
  
- The records created through batch run of package, [https://github.com/SaurabhMulay999/statecodes]Package. The Integrationvalues is same as The Label,
+ The records created through batch run of package, [https://github.com/SaurabhMulay999/statecodes] Package. The Integrationvalues is same as The Label,
  If there is requirement to change the INtegration values as ISO code use JS to bulkily update all the JSON record once.
  
  ````
