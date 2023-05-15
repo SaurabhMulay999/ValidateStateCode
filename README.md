@@ -1,11 +1,61 @@
-# ValidateStateCode
+# Validate State Values
 
 
 To validate the Salesforce Orgs State Values to the respective list of ISO code and states.
 
+Procedure:
+ 
+** Step 1:**
+ Get AddressSetting records through metadata API.
+ **USE:**
+ File.xml
+ `````
+ <?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+	<members>Address</members>
+	<name>Settings</name>
+	</types>
+    <version>57.0</version>
+</Package>
+ 
+ 
+ `````
+ **Step 2:**
+ 
+ Retrive the Data as Single Package, Extract the files then Open Address "Setting" File Which is XML one,
+ Use Online XML to Json Converter to conver the XML file to Javascript Object format.
+ 
+ **Step 3:**
+ 
+ The records created through batch run of package, [https://github.com/SaurabhMulay999/statecodes]Package. The Integrationvalues is same as The Label,
+ If there is requirement to change the INtegration values as ISO code use JS to bulkily update all the JSON record once.
+ 
+ ````
+ let OBJ={}; //Json data which we have converted in previous steps
+ for(var i=0;i<OBJ.countriesAndStates.countries.length;i++){
+    OBJ.countriesAndStates.countries[i].integrationValue=OBJ.countriesAndStates.countries[i].isoCode;	
+    if(OBJ.countriesAndStates.countries[i].states!=undefined){
+    for(var j=0;j<OBJ.countriesAndStates.countries[i].states.length;j++){
+		OBJ.countriesAndStates.countries[i].states[j].integrationValue=OBJ.countriesAndStates.countries[i].states[j].isoCode;
+    }
+} 
+ ````
+Done!!!!!
+
+**Step 4:**
+
+Convert the object return by the above code to XML again and Through Metadata API Deploy Address "Setting" file again, (File should be Zipped)
+
+
+# Validation part
+
+Validate Wether all Values present in Org by again retriving the data and comparing both ways from org to list and lIst to Org.
+
 ````
 //Change the Values of OBJ and States as per your requirement.
- 
+
+
 let OBJ={
 /*
 In format of 
